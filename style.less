@@ -1,0 +1,272 @@
+.lacommon--quickActions {
+    display: flex;
+    gap: 0.25em;
+    align-items: baseline;
+    &[data-lacommon--anchor="top"] {}
+    &[data-lacommon--anchor="bottom"] {
+        position: absolute;
+        bottom: 0.125em;
+        left: 0.5em;
+    }
+}
+
+@keyframes mfc--flash {
+	0% {
+		filter: invert(0);
+	}
+	50% {
+		filter: invert(1);
+	}
+	100% {
+		filter: invert(0);
+	}
+}
+
+.mfc--root {
+	display: contents;
+	> .mfc--action:not(.mfc--swipes,.mfc--fav) {
+		display: none;
+	}
+	.last_mes & > .mfc--action {
+		display: inline-block;
+	}
+}
+.mfc--hover {
+	position: relative;
+	* {
+		opacity: 0.5;
+		&.mfc--hoverOverlay {
+			opacity: 1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			* {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+.mfc--flash {
+	animation-name: flash;
+	animation-duration: 500ms;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: 1;
+}
+.mfc--trigger {
+	display: inline-block;
+	cursor: pointer;
+}
+.mfc--action {
+	display: inline-block;
+	cursor: pointer;
+	width: 1em;
+	text-align: center;
+	opacity: 0.75;
+	&:hover {
+		opacity: 1;
+	}
+
+	&.mfc--fav {
+		filter: grayscale(1);
+		transition: 200ms;
+		&.mfc--isFav {
+			filter: grayscale(0);
+		}
+	}
+}
+.mfc--branchPoint {
+	::-webkit-scrollbar {
+		height: 10px;
+	}
+	::-webkit-scrollbar-thumb {
+		border-top: 2px solid transparent;
+	}
+
+	> .mfc--header {
+		background-color: rgb(80 80 80);
+		cursor: pointer;
+		text-align: center;
+		opacity: 0.75;
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	> .mfc--carousel {
+		display: none;
+		flex: 0 0 100px;
+		gap: 1em;
+		justify-Content: flex-start;
+		overflow-x: auto;
+		&.mfc--active {
+			display: flex;
+		}
+
+		> .mfc--child {
+			flex: 0 0 30%;
+			cursor: pointer;
+			width: 30%;
+			border: 2px solid rgb(80 80 80);
+			font-size: smaller;
+			opacity: 0.5;
+			&:hover {
+				opacity: 1;
+			}
+			&.mfc--current {
+				border-color: blue;
+			}
+
+			> .mfc--header {
+				font-style: italic;
+				border-bottom: 1px solid rgb(80 80 80);
+			}
+			> .mfc--body {
+				height: 100px;
+				overflow-y: auto;
+			}
+		}
+	}
+}
+
+.mfc--ctx-blocker:has(.mfc--tree) {
+	font-size: smaller;
+	> .mfc--tree > .mfc--treeText {
+		color: var(--SmartThemeQuoteColor);
+	}
+	.mfc--active {
+		opacity: 0.8;
+		&:hover {
+			opacity: 1;
+		}
+		> .mfc--tree > .mfc--treeText {
+			color: var(--SmartThemeQuoteColor);
+		}
+	}
+	> .mfc--tree {
+		--triggerTop: 0px;
+		--triggerRight: 0px;
+		position: absolute;
+		top: var(--triggerTop);
+		left: var(--triggerRight);
+		max-width: calc(100vw - 1em - var(--triggerRight));
+		max-height: calc(100vh - 1em - var(--triggerTop));
+		overflow: auto;
+		&.mfc--flipV {
+			top: unset;
+			bottom: calc(100vh - var(--triggerTop));
+			max-height: calc(100vh - 1em - (100vh - var(--triggerTop)));
+		}
+	}
+	.mfc--treeText {
+		white-space: pre-line;
+	}
+	.mfc--treeText:hover {
+		text-decoration: dotted underline;
+	}
+	.mfc--tree {
+		font-size: 1em;
+		cursor: default;
+		.list-group-item {
+			cursor: default;
+		}
+		> .mfc--children {
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
+
+
+.mfc--ctx-blocker {
+    /* backdrop-filter: blur(1px); */
+    /* background-color: rgba(0 0 0 / 10%); */
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+}
+
+.mfc--ctx-menu {
+    position: absolute;
+    overflow: visible;
+	font-size: smaller;
+}
+
+.list-group .list-group-item.mfc--ctx-header {
+    font-weight: bold;
+    cursor: default;
+}
+
+.mfc--ctx-item+.mfc--ctx-header {
+    border-top: 1px solid;
+}
+
+.mfc--ctx-item {
+    position: relative;
+}
+
+.mfc--ctx-expander {
+    border-left: 1px solid;
+    margin-left: 1em;
+    text-align: center;
+    width: 2em;
+}
+
+.mfc--ctx-expander:hover {
+    font-weight: bold;
+}
+
+.mfc--ctx-sub-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .mfc--ctx-blocker {
+        position: absolute;
+    }
+
+    .list-group .list-group-item.mfc--ctx-item {
+        padding: 1em;
+    }
+}
+
+
+
+
+.mfc--swipesModal {
+	.mfc--swipe {
+		cursor: pointer;
+		border: 1px solid var(--SmartThemeBorderColor);
+		border-radius: 10px;
+		padding: 10px;
+		text-align: justify;
+		opacity: 0.5;
+		transition: 200ms;
+		margin-bottom: 1em;
+		position: relative;
+		margin-left: 0.7em;
+		&.mfc--isFav:before {
+			content: '⭐';
+			position: absolute;
+			top: 0;
+			left: -0.9em;
+		}
+		&:hover {
+			opacity: 1;
+		}
+		&.mfc--current {
+			opacity: 0.75;
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}
