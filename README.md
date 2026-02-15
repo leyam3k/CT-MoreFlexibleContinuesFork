@@ -1,65 +1,53 @@
 # CT-MoreFlexibleContinuesFork
 
-A SillyTavern/CozyTavern extension that provides enhanced continue/edit history management with a visual version tracking system. This fork repositions the extension's controls into the message action bar for better integration with SillyTavern's UI.
+A SillyTavern/CozyTavern extension that provides flexible continue functionality for chat messages.
 
 ## Features
 
-- **Version History Tracking**: Every edit and continue operation is tracked in a tree structure, allowing you to navigate between different versions of a message.
-- **Version Indicator**: A subtle `current/total` display shows how many versions exist for each message and which one is currently selected (e.g., `2/3` means you're viewing version 2 of 3 total versions).
-- **Integrated Button Placement**: Action buttons are placed directly in the message action bar (alongside translate, copy, etc.) for a cleaner, more native feel.
-- **Tree View Navigation**: Click the "Show continues" button to view and select from all available versions in a hierarchical tree view.
-- **Undo/Redo Continues**: Quickly undo the last continue operation or regenerate from a specific point in the history.
+- **Continue Generation**: Add a "Continue" button to generate more content for the last message
+- **Undo Continue**: Remove the last continue operation and revert to previous state
+- **Regenerate Continue**: Regenerate the last continued portion
+- **Continue History**: View and navigate through continue branches (swipe-like functionality)
+- **Integration with Message Buttons**: Buttons are placed alongside standard message action buttons
 
-## Installation and Usage
+## Installation
 
-### Installation
+### Installation via Extension Installer
 
-1. Open SillyTavern and navigate to the Extensions panel
-2. Use the "Install Extension" option
-3. Enter the repository URL: `https://github.com/leyam3k/CT-MoreFlexibleContinuesFork`
-4. Click Install
+Use SillyTavern's built-in extension installer with the repository URL.
 
-Alternatively, clone this repository directly into your SillyTavern's `public/scripts/extensions/third-party/` directory.
+### Manual Installation
 
-### Usage
+1. Clone or download this repository
+2. Place the `CT-MoreFlexibleContinuesFork` folder in `SillyTavern/public/scripts/extensions/third-party/`
+3. Restart SillyTavern
 
-Once installed, the extension automatically adds buttons to each message's action bar:
+## Usage
 
-| Button            | Icon  | Description                                                    |
-| ----------------- | ----- | -------------------------------------------------------------- |
-| Undo              | ↶     | Remove the last continue (only on last message)                |
-| Regenerate        | ↻     | Regenerate from the last continue point (only on last message) |
-| Show Continues    | 📑    | View the version tree and select a different version           |
-| Version Indicator | `1/1` | Shows current version / total versions                         |
-| Continue          | →     | Continue generating from this point (only on last message)     |
+The extension adds four buttons to each message's action bar:
 
-**Version Indicator Explained:**
+1. **Undo** (↶): Remove the last continue segment (only visible on the last message)
+2. **Regenerate** (↻): Regenerate the last continue segment (only visible on the last message)
+3. **Show Continues** (≡): View the continue history tree and switch between branches
+4. **Continue** (→): Continue generating from this message
 
-- `1/1` - Unmodified message (no edits or continues)
-- `2/2` - Message has been edited once, viewing the latest version
-- `2/3` - Message has 3 versions, currently viewing version 2
-
-## Slash Commands
-
-The extension also provides slash commands for automation:
+### Slash Commands
 
 - `/continue-undo` - Undo the last continue operation
-- `/continue-regenerate` - Regenerate the last continue
+- `/continue-regenerate` - Regenerate the last continue operation
 
 ## Prerequisites
 
-- SillyTavern version 1.12.0 or higher recommended
-- Works with all API backends
+- SillyTavern (latest version recommended)
 
-## Support and Contributions
+## Differences from Original
 
-For issues, feature requests, or contributions:
-
-- Open an issue on the [GitHub repository](https://github.com/leyam3k/CT-MoreFlexibleContinuesFork)
-- Pull requests are welcome!
-
-This is a fork of the original More Flexible Continues extension, modified for Cozy Tavern with improved UI integration.
+This fork modifies the button placement:
+- Buttons are now placed in the message action buttons bar (`extraMesButtons`)
+- Buttons appear before the translate button
+- A visual separator distinguishes MFC buttons from regular message buttons
+- Settings panel removed (simplified UX)
 
 ## License
 
-AGPL-3.0 - See LICENSE file for details.
+MIT
