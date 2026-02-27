@@ -166,6 +166,11 @@ const regenerate = async()=>{
 const buildSwipeDom = (mesEl)=>{
     const dom = document.createElement('div'); {
         dom.classList.add('mfc--root');
+        // Add a separator element before MFC buttons
+        const separatorLeft = document.createElement('div'); {
+            separatorLeft.classList.add('mfc--separator');
+            dom.append(separatorLeft);
+        }
         const undoTrigger = document.createElement('div'); {
             undoTrigger.classList.add('mfc--undo');
             undoTrigger.classList.add('mfc--action');
@@ -311,9 +316,9 @@ const buildSwipeDom = (mesEl)=>{
             dom.append(cont);
         }
         // Add a separator element after MFC buttons
-        const separator = document.createElement('div'); {
-            separator.classList.add('mfc--separator');
-            dom.append(separator);
+        const separatorRight = document.createElement('div'); {
+            separatorRight.classList.add('mfc--separator');
+            dom.append(separatorRight);
         }
     }
     return dom;
